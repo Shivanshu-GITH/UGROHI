@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 type Interest = "build" | "grow" | "both";
+type Status = "idle" | "sending" | "sent" | "error";
 
 const interests: { value: Interest; label: string; icon: typeof Hammer }[] = [
   { value: "build", label: "Build", icon: Hammer },
@@ -20,40 +21,58 @@ const inputClass =
 
 export function ContactForm() {
   const [interest, setInterest] = useState<Interest>("both");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const get = (k: string) => (data.get(k) as string) || "—";
-    const label = interests.find((i) => i.value === interest)?.label ?? "Both";
 
-    const subject = `New enquiry (${label}) — ${get("name")}`;
-    const body = [
-      `Interested in: ${label}`,
-      `Name: ${get("name")}`,
-      `Business: ${get("business")}`,
-      `Email: ${get("email")}`,
-      `Phone: ${get("phone")}`,
-      `Industry / domain: ${get("domain")}`,
-      `Budget: ${get("budget")}`,
-      "",
-      "Message:",
-      get("message"),
-    ].join("\n");
+    // Honeypot: real users never see or fill this. If it's set, treat as a bot.
+    if ((data.get("bot-field") as string)?.length) {
+      setStatus("sent");
+      return;
+    }
 
-    // Default: open the user's email client with a pre-filled message.
-    // To collect submissions automatically instead, wire this to an endpoint
-    // (Resend / Formspree / a /api/contact route) and POST `data`.
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    // Build a URL-encoded body from every named field (incl. form-name & interest).
+    const body = new URLSearchParams();
+    data.forEach((value, key) => body.append(key, value.toString()));
+
+    setStatus("sending");
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error(`Submission failed: ${res.status}`);
+      setStatus("sent");
+      form.reset();
+      setInterest("both");
+    } catch {
+      setStatus("error");
+    }
   }
 
+  const mailto = `mailto:${site.email}`;
+
   return (
-    <form onSubmit={handleSubmit} className="card p-6 sm:p-8">
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      onSubmit={handleSubmit}
+      className="card p-6 sm:p-8"
+    >
+      {/* Netlify Forms plumbing */}
+      <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden">
+        <label>
+          Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
+        </label>
+      </p>
+
       {/* Interest segmented control */}
       <fieldset>
         <legend className="text-sm font-medium text-ink">I&apos;m interested in…</legend>
@@ -129,11 +148,14 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-ink font-medium text-bg transition-colors hover:bg-white"
+        disabled={status === "sending" || status === "sent"}
+        className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-ink font-medium text-bg transition-colors hover:bg-white disabled:opacity-70"
       >
-        {sent ? (
+        {status === "sending" ? (
+          "Sending…"
+        ) : status === "sent" ? (
           <>
-            <Check className="size-4" /> Opening your email…
+            <Check className="size-4" /> Enquiry sent
           </>
         ) : (
           <>
@@ -141,10 +163,19 @@ export function ContactForm() {
           </>
         )}
       </button>
-      {sent && (
+
+      {status === "sent" && (
         <p className="mt-3 text-center text-xs text-faint">
-          If nothing opened, email us directly at{" "}
-          <a href={`mailto:${site.email}`} className="text-ink underline">
+          Thanks — we&apos;ve got your enquiry and will get back to you shortly. Prefer email?{" "}
+          <a href={mailto} className="text-ink underline">
+            {site.email}
+          </a>
+        </p>
+      )}
+      {status === "error" && (
+        <p className="mt-3 text-center text-xs text-faint">
+          Something went wrong sending your enquiry. Please email us directly at{" "}
+          <a href={mailto} className="text-ink underline">
             {site.email}
           </a>
           .
