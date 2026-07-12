@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Netlify auto-installs this, but declaring it is explicit and version-safe.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
