@@ -110,16 +110,16 @@ export function ContactForm() {
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <Field label="Your name" required>
-          <input name="name" required placeholder="Jane Sharma" className={inputClass} />
+          <input name="name" required autoComplete="name" placeholder="Jane Sharma" className={inputClass} />
         </Field>
         <Field label="Business name">
-          <input name="business" placeholder="Acme Pvt Ltd" className={inputClass} />
+          <input name="business" autoComplete="organization" placeholder="Acme Pvt Ltd" className={inputClass} />
         </Field>
         <Field label="Email" required>
-          <input name="email" type="email" required placeholder="you@company.com" className={inputClass} />
+          <input name="email" type="email" required autoComplete="email" placeholder="you@company.com" className={inputClass} />
         </Field>
         <Field label="Phone / WhatsApp">
-          <input name="phone" placeholder="+91 …" className={inputClass} />
+          <input name="phone" type="tel" autoComplete="tel" placeholder="+91 …" className={inputClass} />
         </Field>
         <Field label="Industry / domain">
           <input name="domain" placeholder="School, clinic, retail…" className={inputClass} />
