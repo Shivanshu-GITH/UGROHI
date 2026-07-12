@@ -40,7 +40,10 @@ export function ContactForm() {
 
     setStatus("sending");
     try {
-      const res = await fetch("/", {
+      // POST to the static form-definition file, NOT "/". With Netlify's
+      // Next.js runtime, "/" is served by the SSR function and bypasses
+      // Netlify's form processor — a static path lets the form handler catch it.
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: body.toString(),
