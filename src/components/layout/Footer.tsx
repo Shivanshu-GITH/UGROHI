@@ -78,7 +78,7 @@ export function Footer() {
             title="Company"
             links={[
               { label: "About", href: "/about" },
-              { label: "Work", href: "/work" },
+              { label: "Samples", href: "/work" },
               { label: "Packages", href: "/packages" },
               { label: "Contact", href: "/contact" },
             ]}
@@ -87,8 +87,8 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-line pt-6 text-sm text-faint sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.name}. {site.stats[0].value} projects ·{" "}
-            {site.stats[1].value} clients · {site.stats[2].value} industries.
+            © {new Date().getFullYear()} {site.name}. Websites, ERP &amp; AI automation — plus the
+            marketing to fill them.
           </p>
           <div className="flex gap-5">
             <Link href="/privacy" className="transition-colors hover:text-ink">

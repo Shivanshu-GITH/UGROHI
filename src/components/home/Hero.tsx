@@ -54,10 +54,10 @@ export function Hero() {
         {/* Trust strip */}
         <Reveal delay={0.26}>
           <div className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-4">
-            {site.stats.map((stat) => (
-              <div key={stat.label} className="bg-surface px-4 py-6 text-center">
-                <div className="font-display text-3xl font-semibold text-ink">{stat.value}</div>
-                <div className="mt-1 text-xs text-faint">{stat.label}</div>
+            {site.trustPoints.map((point) => (
+              <div key={point.label} className="bg-surface px-4 py-6 text-center">
+                <div className="font-display text-2xl font-semibold text-ink">{point.value}</div>
+                <div className="mt-1.5 text-xs leading-snug text-faint">{point.label}</div>
               </div>
             ))}
           </div>

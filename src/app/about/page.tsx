@@ -75,17 +75,43 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Where we are right now */}
       <section className="section pt-0">
         <div className="container-page">
           <Reveal>
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line lg:grid-cols-4">
-              {site.stats.map((stat) => (
-                <div key={stat.label} className="bg-surface px-6 py-10 text-center">
-                  <div className="font-display text-4xl font-semibold text-ink">{stat.value}</div>
-                  <div className="mt-2 text-sm text-faint">{stat.label}</div>
+            <div className="rounded-3xl border border-line bg-surface px-6 py-10 sm:px-10">
+              <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-14">
+                <div>
+                  <span className="eyebrow">
+                    <span className="size-1.5 rounded-full bg-gradient-to-r from-build to-grow" />
+                    Where we are right now
+                  </span>
+                  <h2 className="mt-5 text-2xl font-semibold sm:text-3xl">
+                    A new studio, with the work to prove it.
+                  </h2>
+                  <p className="mt-4 text-muted">
+                    We won&apos;t quote client counts we haven&apos;t earned. Instead we built full
+                    products of our own — a clinic platform, a school website and CMS, a restaurant
+                    site and a salon portal — so you can judge the work directly. All four are
+                    live, and you can click through every screen.
+                  </p>
+                  <div className="mt-7">
+                    <Button href="/work" variant="outline" withArrow>
+                      See the sample builds
+                    </Button>
+                  </div>
                 </div>
-              ))}
+                <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+                  {site.trustPoints.map((point) => (
+                    <div key={point.label} className="bg-surface px-5 py-7 text-center">
+                      <div className="font-display text-2xl font-semibold text-ink">
+                        {point.value}
+                      </div>
+                      <div className="mt-1.5 text-xs leading-snug text-faint">{point.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>

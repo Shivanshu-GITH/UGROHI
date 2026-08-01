@@ -6,7 +6,6 @@ import { SolutionsStrip } from "@/components/home/SolutionsStrip";
 import { TechStack } from "@/components/home/TechStack";
 import { Work } from "@/components/home/Work";
 import { Process } from "@/components/home/Process";
-import { Testimonials } from "@/components/home/Testimonials";
 import { PackagesTeaser } from "@/components/home/PackagesTeaser";
 import { FinalCTA } from "@/components/home/FinalCTA";
 
@@ -21,7 +20,6 @@ export default function HomePage() {
       <TechStack />
       <Work />
       <Process />
-      <Testimonials />
       <PackagesTeaser />
       <FinalCTA />
     </>

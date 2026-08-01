@@ -29,11 +29,12 @@ export const site = {
     x: "https://x.com/",
     youtube: "https://youtube.com/",
   },
-  stats: [
-    { value: "52+", label: "Projects delivered" },
-    { value: "38+", label: "Happy clients" },
-    { value: "12+", label: "Industries served" },
-    { value: "3×", label: "Avg. lead growth" },
+  /** How we work — no client counts, no invented numbers. */
+  trustPoints: [
+    { value: "2-in-1", label: "Build + Grow, one team" },
+    { value: "Free", label: "First call & audit" },
+    { value: "Fixed", label: "Quotes, not hourly surprises" },
+    { value: "One", label: "Point of contact, start to finish" },
   ],
 } as const;
 
@@ -242,6 +243,6 @@ export const navGroups: NavGroup[] = [
 
 export const navLinks: NavLink[] = [
   { label: "Packages", href: "/packages" },
-  { label: "Work", href: "/work" },
+  { label: "Samples", href: "/work" },
   { label: "About", href: "/about" },
 ];
