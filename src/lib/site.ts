@@ -25,7 +25,7 @@ export const site = {
   whatsapp: "https://wa.me/918882183479",
   socials: {
     instagram: "https://instagram.com/ugrohi",
-    linkedin: "https://www.linkedin.com/in/ugrohi-solutions-797762419",
+    linkedin: "https://www.linkedin.com/company/ugrohi-solutions/",
     x: "https://x.com/ugrohi",
     threads: "https://www.threads.com/@ugrohi",
   },
