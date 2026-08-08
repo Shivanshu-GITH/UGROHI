@@ -66,7 +66,7 @@ const jsonLd = {
   url: `https://${site.domain}`,
   description: site.description,
   email: site.email,
-  sameAs: [site.socials.instagram, site.socials.linkedin, site.socials.x, site.socials.youtube],
+  sameAs: [site.socials.instagram, site.socials.linkedin, site.socials.x, site.socials.threads],
   areaServed: "IN",
   knowsAbout: [
     "Web Development",

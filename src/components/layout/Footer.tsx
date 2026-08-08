@@ -2,13 +2,13 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import { LogoMark } from "./Logo";
 import { site, buildServices, growServices, industries } from "@/lib/site";
-import { InstagramIcon, LinkedInIcon, XIcon, YouTubeIcon } from "@/components/icons/brands";
+import { InstagramIcon, LinkedInIcon, XIcon, ThreadsIcon } from "@/components/icons/brands";
 
 const socials = [
   { href: site.socials.instagram, label: "Instagram", icon: InstagramIcon },
   { href: site.socials.linkedin, label: "LinkedIn", icon: LinkedInIcon },
   { href: site.socials.x, label: "X", icon: XIcon },
-  { href: site.socials.youtube, label: "YouTube", icon: YouTubeIcon },
+  { href: site.socials.threads, label: "Threads", icon: ThreadsIcon },
 ];
 
 function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
