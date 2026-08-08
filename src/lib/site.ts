@@ -26,7 +26,7 @@ export const site = {
   socials: {
     instagram: "https://instagram.com/ugrohi",
     linkedin: "https://www.linkedin.com/in/ugrohi-solutions-797762419",
-    x: "https://x.com/",
+    x: "https://x.com/ugrohi",
     threads: "https://www.threads.com/@ugrohi",
   },
   /** How we work — no client counts, no invented numbers. */
